@@ -4,6 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "1911d028ab0a1abb4bd1560260b38aea",
     "packages": [
         {
@@ -70,6 +71,11 @@
             "time": "2016-07-25T18:03:20+00:00"
         },
         {
+=======
+    "content-hash": "f95649cf8a50200631ae19d0cfeaddff",
+    "packages": [
+        {
+>>>>>>> ded2931a342082769828c793eaf6bfa71a718c85
             "name": "bryanjhv/slim-session",
             "version": "3.6.1",
             "source": {
@@ -150,6 +156,7 @@
             "time": "2017-02-14T19:40:03+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "guzzle/guzzle",
             "version": "v3.9.3",
             "source": {
@@ -246,6 +253,8 @@
             "time": "2015-03-18T18:23:50+00:00"
         },
         {
+=======
+>>>>>>> ded2931a342082769828c793eaf6bfa71a718c85
             "name": "monolog/monolog",
             "version": "1.23.0",
             "source": {
@@ -700,6 +709,7 @@
             "time": "2018-04-19T19:29:08+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "symfony/event-dispatcher",
             "version": "v2.8.48",
             "source": {
@@ -760,6 +770,8 @@
             "time": "2018-11-21T14:20:20+00:00"
         },
         {
+=======
+>>>>>>> ded2931a342082769828c793eaf6bfa71a718c85
             "name": "symfony/polyfill-mbstring",
             "version": "v1.9.0",
             "source": {
