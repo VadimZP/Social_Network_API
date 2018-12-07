@@ -53,8 +53,8 @@ class SettingsController extends Controller {
 			array(
 				'Bucket'=> 'social-network-zp',
 				'Key' =>  $keyName,
-				'SourceFile' => 'C:\Users\iceman\Desktop\Temp\white-girls-black-white.jpg',
-				'StorageClass' => 'REDUCED_REDUNDANCY'
+				'SourceFile' => $file,
+				// 'StorageClass' => 'REDUCED_REDUNDANCY'
 			)
 		);
     }
