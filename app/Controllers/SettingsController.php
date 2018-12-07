@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use Respect\Validation\Validator as v;
-use Aws\S3\S3Client::factory() as s3;
+use Aws\S3\S3Client as s3;
 $bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
 
 class SettingsController extends Controller {
@@ -29,6 +29,7 @@ class SettingsController extends Controller {
 
         $fileSearch = "avatar";
         $files = glob("D:/Soft/xampp/htdocs/socialnetwork/server/public/$userId/*" . $fileSearch . "*");
+        
 
         if(count($files) > 0) unlink($files[0]);
         
@@ -37,6 +38,8 @@ class SettingsController extends Controller {
             $name[0] = "avatar" . uniqid();
             $name = join(".", $name);
             $whitelist = array('127.0.0.1','::1');
+            $s3 = s3::factory();
+            $upload = $s3->upload($bucket, $name, fopen($avatar['tmp_name'], 'rb'), 'public-read');
             
             if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)) {
                 $avatar->moveTo("D:/Soft/xampp/htdocs/socialnetwork/server/public/$userId/$name");
