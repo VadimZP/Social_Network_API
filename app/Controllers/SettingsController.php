@@ -22,7 +22,7 @@ class SettingsController extends Controller {
         $keyName = 'test_example/' . basename($_FILES["file"]['tmp_name']);
         $pathInS3 = 'https://s3.eu-central-1.amazonaws.com/social-network-zp/' . $keyName;
 
-        $file = $_FILES["file"]['name'];
+        $file = $_FILES["fileToUpload"]['tmp_name'];
 
 		$s3->putObject(
 			array(
