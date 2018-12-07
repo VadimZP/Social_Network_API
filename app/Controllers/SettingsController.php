@@ -8,31 +8,6 @@ use Aws\S3\S3Client;
 class SettingsController extends Controller {
 
     public function uploadAvatar($request, $response) {
-      /*   $files = $request->getUploadedFiles();
-        $userId = $request->getParam('userId');
-        $avatar = $files['file'];
-
-        if (!file_exists("$userId/")) {
-            mkdir("$userId/");
-        }
-
-        $fileSearch = "avatar";
-        $files = glob("D:/Soft/xampp/htdocs/socialnetwork/server/public/$userId/*" . $fileSearch . "*");
-
-        if(count($files) > 0) unlink($files[0]);
-
-        if($avatar->getError() === UPLOAD_ERR_OK) {
-            $name = explode(".", $avatar->getClientFilename());
-            $name[0] = "avatar" . uniqid();
-            $name = join(".", $name);
-            $whitelist = array('127.0.0.1','::1');
-            
-            if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)) {
-                $avatar->moveTo("D:/Soft/xampp/htdocs/socialnetwork/server/public/$userId/$name");
-            } else {
-                $avatar->moveTo("D:/Soft/xampp/htdocs/socialnetwork/server/public/$userId/$name");
-            }
-        } */
         $s3 = S3Client::factory(
             array(
                 'credentials' => array(
@@ -53,7 +28,7 @@ class SettingsController extends Controller {
 			array(
 				'Bucket'=> 'social-network-zp',
 				'Key' =>  $keyName,
-				'SourceFile' => 'C:/Users/iceman/Desktop/Temp/white-girls-black-white.jpg',
+				'SourceFile' => $file,
 				'StorageClass' => 'REDUCED_REDUNDANCY'
 			)
 		);
