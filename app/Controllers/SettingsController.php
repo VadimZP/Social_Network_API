@@ -3,35 +3,11 @@
 namespace App\Controllers;
 
 use Respect\Validation\Validator as v;
-use Aws\S3\S3Client;
+use google\appengine\api\cloud_storage\CloudStorageTools;
 
 class SettingsController extends Controller {
-
     public function uploadAvatar($request, $response) {
-        $s3 = S3Client::factory(
-            array(
-                'credentials' => array(
-                    'key' => 'AKIAIY26D5Y45YWB55EA',
-                    'secret' => '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'
-                ),
-                'version' => 'latest',
-                'region'  => 'eu-central-1'
-            )
-        );
-
-        $keyName = 'test_example/' . basename($_FILES["file"]['tmp_name']);
-        $pathInS3 = 'https://s3.eu-central-1.amazonaws.com/social-network-zp/' . $keyName;
-
-        $file = $_FILES["file"]['tmp_name'];
-
-        $s3->putObject(
-            array(
-                'Bucket'=> 'social-network-zp',
-                'Key' =>  $keyName,
-                'SourceFile' => $file,
-                'StorageClass' => 'REDUCED_REDUNDANCY'
-            )
-        );
+        file_put_contents("gs://social-network-files/hello.txt", 'wasup');
     }
 
     public function changeData($request, $response) {
