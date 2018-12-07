@@ -4,10 +4,16 @@ namespace App\Controllers;
 
 use Respect\Validation\Validator as v;
 use google\appengine\api\cloud_storage\CloudStorageTools;
+use Google\Cloud\Storage\StorageClient;
 
 class SettingsController extends Controller {
     public function uploadAvatar($request, $response) {
-        file_put_contents("gs://social-network-files/hello.txt", 'wasup');
+        $storage = new StorageClient();
+        $file = fopen('C:/Users/iceman/Desktop/hello.txt', 'r');
+        $bucket = $storage->bucket('social-network-files');
+        $object = $bucket->upload($file, [
+            'name' => 'kek'
+        ]);
     }
 
     public function changeData($request, $response) {
