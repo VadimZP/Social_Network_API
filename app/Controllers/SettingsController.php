@@ -51,10 +51,10 @@ class SettingsController extends Controller {
 
 		$s3->putObject(
 			array(
-				'Bucket'=> 'social-network-zp',
+				'Bucket'=>$bucketName,
 				'Key' =>  $keyName,
-				'SourceFile' => $file
-				// 'StorageClass' => 'REDUCED_REDUNDANCY'
+				'SourceFile' => $file,
+				'StorageClass' => 'REDUCED_REDUNDANCY'
 			)
 		);
     }
