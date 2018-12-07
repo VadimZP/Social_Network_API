@@ -19,13 +19,10 @@ class SettingsController extends Controller {
             )
         );
 
-        $keyName = 'test_example/' . basename($_FILES["file"]['tmp_name']);
+        $keyName = 'test_example/' . basename($_FILES['file']['tmp_name']);
         $pathInS3 = 'https://s3.eu-central-1.amazonaws.com/social-network-zp/' . $keyName;
 
-        $files = $request->getUploadedFiles();
-        // $userId = $request->getParam('userId');
-        $avatar = $files['file'];
-        $file = $avatar['tmp_name'];
+        $file = $_FILES['file']['tmp_name'];
 
 		$s3->putObject(
 			array(
