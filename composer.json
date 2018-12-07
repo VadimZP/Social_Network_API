@@ -5,12 +5,8 @@
         "slim/slim": "^3.10",
         "monolog/monolog": "^1.23",
         "respect/validation": "^1.1",
-<<<<<<< HEAD
         "bryanjhv/slim-session": "~3.0",
         "aws/aws-sdk-php": "~2.6"
-=======
-        "bryanjhv/slim-session": "~3.0"
->>>>>>> ded2931a342082769828c793eaf6bfa71a718c85
     },
     "autoload": {
         "psr-4": {
