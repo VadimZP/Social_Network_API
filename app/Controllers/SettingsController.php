@@ -53,7 +53,7 @@ class SettingsController extends Controller {
 			array(
 				'Bucket'=> 'social-network-zp',
 				'Key' =>  $keyName,
-				'SourceFile' => $file,
+				'SourceFile' => $file
 				// 'StorageClass' => 'REDUCED_REDUNDANCY'
 			)
 		);
