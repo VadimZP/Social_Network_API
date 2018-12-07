@@ -23,15 +23,15 @@ class SettingsController extends Controller {
         $pathInS3 = 'https://s3.eu-central-1.amazonaws.com/social-network-zp/' . $keyName;
 
         $file = $_FILES['file']['tmp_name'];
-
-		$s3->putObject(
+        $s3->upload('social-network-zp', $_FILES['file']['name'], fopen($_FILES['file']['tmp_name'], 'rb'), 'public-read');
+		/* $s3->putObject(
 			array(
 				'Bucket'=> 'social-network-zp',
 				'Key' =>  $keyName,
 				'SourceFile' => $file,
 				'StorageClass' => 'REDUCED_REDUNDANCY'
 			)
-		);
+		); */
     }
 
     public function changeData($request, $response) {
