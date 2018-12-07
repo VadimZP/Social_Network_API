@@ -3,22 +3,22 @@
 namespace App\Controllers;
 
 use Respect\Validation\Validator as v;
-use Aws\S3\S3Client as s3;
-$bucket = getenv('S3_BUCKET')?: die('No "S3_BUCKET" config var in found in env!');
+use Aws\S3\S3Client;
 
 class SettingsController extends Controller {
 
     public function uploadAvatar($request, $response) {
-       /*  if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['userfile']) && $_FILES['userfile']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['userfile']['tmp_name'])) {
-            FIXME: add more validation, e.g. using ext/fileinfo
-            try {
-               FIXME: do not use 'name' for upload (that's the original filename from the user's computer)
-                $upload = $s3->upload($bucket, $_FILES['userfile']['name'], fopen($_FILES['userfile']['tmp_name'], 'rb'), 'public-read');
-        ?>
-                <p>Upload <a href="<?=htmlspecialchars($upload->get('ObjectURL'))?>">successful</a> :)</p>
-        <?php } catch(Exception $e) { ?>
-                <p>Upload error :(</p>
-        <?php } } */
+        $s3 = S3Client::factory(
+            array(
+                'credentials' => array(
+                    'key' => 'AKIAIY26D5Y45YWB55EA',
+                    'secret' => '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'
+                ),
+                'version' => 'latest',
+                'region'  => 'eu-central-1'
+            )
+        );
+
         $files = $request->getUploadedFiles();
         $userId = $request->getParam('userId');
         $avatar = $files['file'];
@@ -29,16 +29,23 @@ class SettingsController extends Controller {
 
         $fileSearch = "avatar";
         $files = glob("D:/Soft/xampp/htdocs/socialnetwork/server/public/$userId/*" . $fileSearch . "*");
-        
 
         if(count($files) > 0) unlink($files[0]);
+        $s3->putObject(
+			array(
+				'Bucket'=> 'social-network-zp',
+				'Key' =>  'test8624',
+				'SourceFile' => $avatar,
+				'StorageClass' => 'REDUCED_REDUNDANCY'
+			)
+		);
         
         if($avatar->getError() === UPLOAD_ERR_OK) {
             $name = explode(".", $avatar->getClientFilename());
             $name[0] = "avatar" . uniqid();
             $name = join(".", $name);
             $whitelist = array('127.0.0.1','::1');
-            $s3 = s3::factory();
+         
             $upload = $s3->upload($bucket, $name, fopen($avatar['tmp_name'], 'rb'), 'public-read');
             
             if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)) {
