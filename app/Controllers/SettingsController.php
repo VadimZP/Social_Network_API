@@ -24,6 +24,7 @@ class SettingsController extends Controller {
 
         $file = $_FILES["file"]['tmp_name'];
 
+<<<<<<< HEAD
         $s3->putObject(
             array(
                 'Bucket'=> 'social-network-zp',
@@ -32,6 +33,16 @@ class SettingsController extends Controller {
                 'StorageClass' => 'REDUCED_REDUNDANCY'
             )
         );
+=======
+		$s3->putObject(
+			array(
+				'Bucket'=> 'social-network-zp',
+				'Key' =>  $keyName,
+				'SourceFile' => $file,
+				'StorageClass' => 'REDUCED_REDUNDANCY'
+			)
+		);
+>>>>>>> 3339ffa14683b24a38a6c891485c837a0ea313b4
     }
 
     public function changeData($request, $response) {
