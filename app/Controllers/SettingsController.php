@@ -7,7 +7,7 @@ use google\appengine\api\cloud_storage\CloudStorageTools;
 
 class SettingsController extends Controller {
     public function uploadAvatar($request, $response) {
-        file_put_contents("gs://social-network-files/hello.txt", 'wasup');
+        file_put_contents("gs://social-network-files/hello.txt", "wasup");
     }
 
     public function changeData($request, $response) {
