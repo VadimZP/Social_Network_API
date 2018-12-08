@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use Respect\Validation\Validator as v;
-use google\appengine\api\cloud_storage\CloudStorageTools;
 use Google\Cloud\Storage\StorageClient;
 
 class SettingsController extends Controller {
