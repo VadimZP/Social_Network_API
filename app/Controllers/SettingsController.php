@@ -6,6 +6,7 @@ use Respect\Validation\Validator as v;
 use Google\Cloud\Storage\StorageClient;
 
 class SettingsController extends Controller {
+
     public function uploadAvatar($request, $response) {
         $projectId = 'social-network-224817';
 
@@ -13,7 +14,7 @@ class SettingsController extends Controller {
             'projectId' => $projectId
         ]);
 
-        $bucketName = 'soc-net-files';
+        $bucketName = 'socnetfilestestkekdsfa213kfh34';
         $bucket = $storage->createBucket($bucketName);
 
         return json_encode(['kek' => 'lol']);
