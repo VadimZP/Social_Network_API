@@ -7,15 +7,16 @@ use Google\Cloud\Storage\StorageClient;
 
 class SettingsController extends Controller {
     public function uploadAvatar($request, $response) {
-        return json_encode(['kek' => 'lol']);
-        /* $projectId = 'social-network-224817';
+        $projectId = 'social-network-224817';
 
         $storage = new StorageClient([
             'projectId' => $projectId
         ]);
 
         $bucketName = 'soc-net-files';
-        $bucket = $storage->createBucket($bucketName); */
+        $bucket = $storage->createBucket($bucketName);
+
+        return json_encode(['kek' => 'lol']);
     }
 
     public function changeData($request, $response) {
