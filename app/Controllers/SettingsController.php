@@ -18,7 +18,7 @@ class SettingsController extends Controller {
         $bucketName = 'files-of-' . $userId;
         $bucket = $storage->createBucket($bucketName);
  
-         $file = fopen('C:\Users\iceman\Desktop\Temp', 'r');
+         $file = fopen('C:\Users\iceman\Desktop\Temp\ded.jpg', 'r');
          $bucket = $storage->bucket($bucketName);
          $object = $bucket->upload($file, [
              'name' => $_FILES['file']['name']
