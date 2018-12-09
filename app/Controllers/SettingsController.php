@@ -17,7 +17,7 @@ class SettingsController extends Controller {
         $userId = $request->getParam('userId');
 
         $bucketName = 'files-of-' . $userId;
-
+        $bucket;
         if(!$storage->bucket($bucketName)) {
             $bucket = $storage->createBucket($bucketName);
         }
