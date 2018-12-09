@@ -13,15 +13,19 @@ class SettingsController extends Controller {
         $storage = new StorageClient([
             'projectId' => $projectId
         ]);
+        
         $userId = $request->getParam('userId');
 
         $bucketName = 'files-of-' . $userId;
-        $bucket = $storage->createBucket($bucketName);
- 
+
+        if(!$bucket = $storage->bucket($bucketName)) {
+            $bucket = $storage->createBucket($bucketName);
+        }
+
         $file = fopen($_FILES['file']['tmp_name'], 'r');
          $bucket = $storage->bucket($bucketName);
          $object = $bucket->upload($file, [
-             'name' => $_FILES['file']['name']
+             'name' => 'avatar'
          ]);
     }
 
