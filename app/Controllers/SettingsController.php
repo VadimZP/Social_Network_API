@@ -15,7 +15,7 @@ class SettingsController extends Controller {
         ]);
         $userId = $request->getParam('userId');
 
-        $bucketName = `files-of-sdfaerewr`;
+        $bucketName = 'files-of-' . $userId;
         $bucket = $storage->createBucket($bucketName);
 
 //         $files = $request->getUploadedFiles();
