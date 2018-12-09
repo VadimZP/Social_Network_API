@@ -17,15 +17,11 @@ class SettingsController extends Controller {
 
         $bucketName = 'files-of-' . $userId;
         $bucket = $storage->createBucket($bucketName);
-
-//          $files = $request->getUploadedFiles();
-//          $avatar = $files['file'];
-            return json_encode($_FILES);
  
          $file = fopen('C:\Users\iceman\Desktop\Temp', 'r');
          $bucket = $storage->bucket($bucketName);
          $object = $bucket->upload($file, [
-             'name' => $_FILES['name']
+             'name' => $_FILES['file']['name']
          ]);
     }
 
