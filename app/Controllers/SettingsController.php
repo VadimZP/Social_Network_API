@@ -20,7 +20,7 @@ class SettingsController extends Controller {
 
 //          $files = $request->getUploadedFiles();
 //          $avatar = $files['file'];
-//          return json_encode($_FILES);
+            return json_encode($_FILES);
  
          $file = fopen('C:\Users\iceman\Desktop\Temp', 'r');
          $bucket = $storage->bucket($bucketName);
