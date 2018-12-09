@@ -18,14 +18,14 @@ class SettingsController extends Controller {
         $bucketName = `files-of-$userId`;
         $bucket = $storage->createBucket($bucketName);
 
-        $files = $request->getUploadedFiles();
-        $avatar = $files['file'];
+//         $files = $request->getUploadedFiles();
+//         $avatar = $files['file'];
         
-        $file = fopen($avatar['tmp_name'], 'r');
-        $bucket = $storage->bucket($bucketName);
-        $object = $bucket->upload($file, [
-            'name' => `avatar-$userId`
-        ]);
+//         $file = fopen($avatar['tmp_name'], 'r');
+//         $bucket = $storage->bucket($bucketName);
+//         $object = $bucket->upload($file, [
+//             'name' => `avatar-$userId`
+//         ]);
     }
 
     public function changeData($request, $response) {
