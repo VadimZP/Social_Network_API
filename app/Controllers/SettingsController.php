@@ -16,8 +16,6 @@ class SettingsController extends Controller {
 
         $bucketName = 'socnetfilestestkekdsfa213kfh34';
         $bucket = $storage->createBucket($bucketName);
-
-        return json_encode(['kek' => 'lol']);
     }
 
     public function changeData($request, $response) {
