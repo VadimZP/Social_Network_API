@@ -8,23 +8,19 @@ use Google\Cloud\Storage\StorageClient;
 class SettingsController extends Controller {
 
     public function uploadAvatar($request, $response) {
-        $projectId = 'social-network-224817';
+          $projectId = 'social-network-224817';
 
-        $storage = new StorageClient([
-            'projectId' => $projectId
+         $storage = new StorageClient([
+         'projectId' => $projectId
         ]);
         
         $userId = $request->getParam('userId');
-
         $bucketName = 'files-of-' . $userId;
         
-        $bucket = $storage->createBucket($bucketName);
-        $bucket = $storage->bucket($bucketName);
-  
-        $file = fopen($_FILES['file']['tmp_name'], 'r');
+         $file = fopen($_FILES['file']['tmp_name'], 'r');
          $bucket = $storage->bucket($bucketName);
          $object = $bucket->upload($file, [
-             'name' => 'avatar'
+         'name' => 'avatar'
          ]);
     }
 
