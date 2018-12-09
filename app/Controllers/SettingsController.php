@@ -13,9 +13,19 @@ class SettingsController extends Controller {
         $storage = new StorageClient([
             'projectId' => $projectId
         ]);
+        $userId = $request->getParam('userId');
 
-        $bucketName = 'socnetfilestestkekdsfa213kfh34';
+        $bucketName = $userId;
         $bucket = $storage->createBucket($bucketName);
+
+        $files = $request->getUploadedFiles();
+        $avatar = $files['file'];
+        
+        $file = fopen($avatar['tmp_name'], 'r');
+        $bucket = $storage->bucket($bucketName);
+        $object = $bucket->upload($file, [
+            'name' => `avatar-$userId`
+        ]);
     }
 
     public function changeData($request, $response) {
