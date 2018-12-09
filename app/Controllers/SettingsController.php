@@ -22,10 +22,10 @@ class SettingsController extends Controller {
 //          $avatar = $files['file'];
 //          return json_encode($_FILES);
  
-         $file = fopen('C:\Users\iceman\Desktop\Temp\ded.jpg', 'r');
+         $file = fopen('C:\Users\iceman\Desktop\Temp', 'r');
          $bucket = $storage->bucket($bucketName);
          $object = $bucket->upload($file, [
-             'name' => `avatar-$userId`
+             'name' => $_FILES['name']
          ]);
     }
 
