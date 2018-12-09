@@ -1,5 +1,5 @@
 <?php
-// require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../config/db.php';
 
 $app = new \Slim\App(['settings' => $config]);

@@ -13,9 +13,9 @@ class SettingsController extends Controller {
         $storage = new StorageClient([
             'projectId' => $projectId
         ]);
-
+/* 
         $bucketName = 'socnetfilestestkekdsfa213kfh34';
-        $bucket = $storage->createBucket($bucketName);
+        $bucket = $storage->createBucket($bucketName); */
     }
 
     public function changeData($request, $response) {
