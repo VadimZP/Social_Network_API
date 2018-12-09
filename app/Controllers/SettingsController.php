@@ -14,10 +14,8 @@ class SettingsController extends Controller {
             'projectId' => $projectId
         ]);
 
-        return json_encode($storage);
-/* 
         $bucketName = 'socnetfilestestkekdsfa213kfh34';
-        $bucket = $storage->createBucket($bucketName); */
+        $bucket = $storage->createBucket($bucketName);
     }
 
     public function changeData($request, $response) {
