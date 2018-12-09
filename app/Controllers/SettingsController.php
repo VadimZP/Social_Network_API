@@ -17,9 +17,10 @@ class SettingsController extends Controller {
         $userId = $request->getParam('userId');
 
         $bucketName = 'files-of-' . $userId;
-        $bucket = $storage->createBucket($bucketName);
-        return json_encode($bucket);
         $bucket = $storage->bucket($bucketName);
+        return json_encode($bucket);
+        $bucket = $storage->createBucket($bucketName);
+        
   
         $file = fopen($_FILES['file']['tmp_name'], 'r');
          $bucket = $storage->bucket($bucketName);
