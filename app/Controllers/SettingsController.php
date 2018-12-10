@@ -8,20 +8,46 @@ use Google\Cloud\Storage\StorageClient;
 class SettingsController extends Controller {
 
     public function uploadAvatar($request, $response) {
-          $projectId = 'social-network-224817';
-
-         $storage = new StorageClient([
-         'projectId' => $projectId
+        $projectId = 'social-network-224817';
+        $storage = new StorageClient([
+            'projectId' => $projectId
         ]);
         
         $userId = $request->getParam('userId');
+
         $bucketName = 'files-of-' . $userId;
+        $bucket = $storage->bucket($bucketName);
+
+        if (!$bucket->exists()) {
+            $bucket = $storage->createBucket($bucketName);
+        } else {
+            foreach ($bucket->objects() as $object) {
+                $object->delete();
+            }
+        }
+
+        $name = explode(".", $_FILES['file']['name']);
+        $name[0] = "avatar" . uniqid();
+        $name = join(".", $name);
+
+        $file = fopen($_FILES['file']['tmp_name'], 'r');
+
+        $object = $bucket->upload($file, [
+            'name' => $name
+        ]);
+        $object->update(['acl' => []], ['predefinedAcl' => 'PUBLICREAD']);
+
+        $avatar = $bucket->object($name);
+        $avataURL = "http://storage.googleapis.com/$bucketName/$name";
+
+        $sql = "UPDATE users SET 
+            users.avatar = '$avataURL'
+            WHERE users.id = $userId";
+
+        $stmt = $this->db->prepare($sql);
+        $avatar = $this->db->query($sql);
         
-         $file = fopen($_FILES['file']['tmp_name'], 'r');
-         $bucket = $storage->bucket($bucketName);
-         $object = $bucket->upload($file, [
-         'name' => 'avatar'
-         ]);
+        return $response->withJson($avataURL);
     }
 
     public function changeData($request, $response) {
