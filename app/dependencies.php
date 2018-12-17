@@ -29,6 +29,10 @@ $container['MessagesController'] = function($c) {
     return new \App\Controllers\MessagesController($c);
 };
 
+$container['PostsController'] = function($c) {
+    return new \App\Controllers\PostsController($c);
+};
+
 $container['NotificationsController'] = function($c) {
     return new \App\Controllers\NotificationsController($c);
 };
