@@ -6,7 +6,6 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 /* Users Controller */
 $app->get('/users/{name}', 'UsersController:getUser');
-// $app->get('/users/user[/{request_purpose}[/{email}[/{name}]]]', 'UsersController:getUser');
 $app->get('/users/all/{id}[/{start}[/{end}]]', 'UsersController:getAllUsers');
 $app->post('/users/last', 'UsersController:getLastUser');
 $app->get('/users/{id}/friends', 'UsersController:getAllFriends');
@@ -23,6 +22,13 @@ $app->post('/settings/avatar', 'SettingsController:uploadAvatar');
 /* Messages Controller */
 $app->get('/users/{id}/messages', 'MessagesController:getAllMessages');
 $app->post('/users/{id}/messages', 'MessagesController:sendMessage');
+
+/* Posts Controller */
+$app->get('/posts/all/{author}', 'PostsController:getAllPosts');
+$app->get('/posts/{post_id}', 'PostsController:getPost');
+$app->post('/posts', 'PostsController:sendPost');
+$app->delete('/posts/{post_id}', 'PostsController:deletePost');
+$app->put('/posts/{post_id}', 'PostsController:editPost');
 
 /* Notifications Controller */
 $app->get('/users/{id}/notifications', 'NotificationsController:getNotifications');
