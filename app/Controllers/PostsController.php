@@ -26,7 +26,7 @@ class PostsController extends Controller {
     public function getPost($request, $response, $args) {
         $post_id = $args['post_id'];
 
-        $sql  = "SELECT * FROM posts WHERE author = $id and id = $post_id";
+        $sql  = "SELECT * FROM posts WHERE id = $post_id";
         
         try {
             $stmt = $this->db->prepare($sql);
@@ -43,14 +43,15 @@ class PostsController extends Controller {
     }
 
     public function sendPost($request, $response, $args) {
-        $text         = $request->getParam('text');
         $author       = $request->getParam('author');
+        $text         = $request->getParam('text');
+        $date         = $request->getParam('date');
 
         $sql = "INSERT INTO 
         posts (text,author,date) 
         VALUES 
         (:text,:author,CURRENT_TIMESTAMP)";
-        
+
         try {
             $stmt = $this->db->prepare($sql);
 
@@ -58,24 +59,29 @@ class PostsController extends Controller {
             $stmt->bindParam(':author', $author);
 
             $stmt->execute();
+
+            $stmt = $this->db->query("SELECT LAST_INSERT_ID()");
+            $lastId = $stmt->fetchColumn();
         } catch(PDOException $e) {
             echo '{"error": {"text": '.$e->getMessage().'}}';
         }
-        
+
         $post = array(
+            'id' => $lastId,
             'text' => $text,
             'author' => $author,
+            'date' => $date
         );
-
         $res = json_encode($post);
-        return $res;
+        
+        return json_encode($post);
     }
 
     public function deletePost($request, $response, $args) {
         $post_id = $args['post_id'];
 
         $sql = "DELETE FROM posts
-        WHERE post_id = $post_id";
+        WHERE id = $post_id";
         
         try {
             $stmt = $this->db->prepare($sql);
@@ -92,21 +98,20 @@ class PostsController extends Controller {
         $text         = $request->getParam('text');
 
         $sql = "UPDATE posts SET 
-        users.text = '$text',
+        posts.text = '$text'
         WHERE posts.id = $post_id";
 
         try {
             $stmt = $this->db->prepare($sql);
 
             $stmt->bindParam(':text', $text);
-            $stmt->bindParam(':id', $post_id);
 
             $stmt->execute();
         } catch(PDOException $e) {
             echo '{"error": {"text": '.$e->getMessage().'}}';
         }
 
-        $sql  = "SELECT * FROM posts WHERE author = $id and id = $post_id";
+        $sql  = "SELECT * FROM posts WHERE id = $post_id";
 
         $stmt = $this->db->prepare($sql);
 
